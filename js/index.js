@@ -7,20 +7,19 @@ const loadTools = () =>{
 }
 // declare a function for display tools details
 const displayTools = (tools) =>{
-    
-    const seeMoreBtn = document.getElementById('seeMoreBtn');
 
-    if(tools.length > 6){
-      tools = tools.slice(0, 6);
-      seeMoreBtn.classList.remove('d-none');
-    }
-    else{
-      seeMoreBtn.classList.add('d-none');
+    const seeMoreBtn = document.getElementById('seeMoreBtn');
+    const seeMore = document.getElementById('moreToolsBtn').addEventListener('click', function(){
+      if(tools.length > 6){
+        tools = tools.slice(0, 6)
+        seeMoreBtn.classList.remove('d-none');
+      }
+      else{
+        seeMoreBtn.classList.add('d-none');
+      }
+      
+     })
     
-    }
-    document.getElementById('moreToolsBtn').addEventListener('click', function(){
-      tools = tools.slice(6, 12);
-      })
   
     const toolsContainer = document.getElementById('toolsContainer');
     
@@ -54,8 +53,21 @@ const displayTools = (tools) =>{
 
         toolsContainer.appendChild(toolDiv);
     });
+    /* toggleSpinner(false); */
   
  }
+/*  const toggleSpinner = isLoading => {
+  const loaderSection = document.getElementById('loader');
+  if(isLoading){
+      loaderSection.classList.remove('d-none')
+  }
+  else{
+      loaderSection.classList.add('d-none');
+  }
+}
+ const seeMore = document.getElementById('moreToolsBtn').addEventListener('click', function(){
+  toggleSpinner(true);
+ }) */
 const loadToolsDetails =  id =>{
     const url =`https://openapi.programming-hero.com/api/ai/tool/${id}`;
     fetch(url)
@@ -106,7 +118,7 @@ const displayToolsDetails = item =>{
     <div class="card-body">
       <h5 class="card-title">${input_output_examples[0].input}</h5>
       <p class="card-text">${input_output_examples[0].output ? input_output_examples[0].output : 'No! Not Yet! Take a break!!!' }</p>
-      <button class="py-1 px-3 btn btn-danger position-absolute top-0 end-0">${accuracyScore} <span>accuracy</span></button>
+      <button id="accuracy" class="py-1 px-3 btn btn-danger position-absolute top-0 end-0">${accuracyScore ? accuracyScore : '' }%<span> accuracy</span> </button>
     </div>
   </div>
   `;
