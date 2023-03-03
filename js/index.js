@@ -8,13 +8,11 @@ const loadTools = () =>{
       console.log(error)
     })
 }
+
 // declare a function for display tools details
 const displayTools = (tools) =>{
 
-    const seeMoreBtn = document.getElementById('seeMoreBtn');
-    const seeMore = document.getElementById('moreToolsBtn').addEventListener('click', function(){
-    
-     })
+     const seeMoreBtn = document.getElementById('seeMoreBtn');
      if(tools.length > 6){
       tools = tools.slice(0, 6)
       seeMoreBtn.classList.remove('d-none');
@@ -23,7 +21,7 @@ const displayTools = (tools) =>{
       seeMoreBtn.classList.add('d-none');
       
     }
-    
+     
     
   
     const toolsContainer = document.getElementById('toolsContainer');
