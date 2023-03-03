@@ -4,21 +4,26 @@ const loadTools = () =>{
     fetch(url)
     .then(res => res.json())
     .then(data => displayTools(data.data.tools))
+    .catch(error =>{
+      console.log(error)
+    })
 }
 // declare a function for display tools details
 const displayTools = (tools) =>{
 
     const seeMoreBtn = document.getElementById('seeMoreBtn');
     const seeMore = document.getElementById('moreToolsBtn').addEventListener('click', function(){
-      if(tools.length > 6){
-        tools = tools.slice(0, 6)
-        seeMoreBtn.classList.remove('d-none');
-      }
-      else{
-        seeMoreBtn.classList.add('d-none');
-      }
-      
+    
      })
+     if(tools.length > 6){
+      tools = tools.slice(0, 6)
+      seeMoreBtn.classList.remove('d-none');
+    }
+    else{
+      seeMoreBtn.classList.add('d-none');
+      
+    }
+    
     
   
     const toolsContainer = document.getElementById('toolsContainer');
@@ -53,10 +58,10 @@ const displayTools = (tools) =>{
 
         toolsContainer.appendChild(toolDiv);
     });
-    /* toggleSpinner(false); */
+    toggleSpinner(false);
   
  }
-/*  const toggleSpinner = isLoading => {
+ const toggleSpinner = isLoading => {
   const loaderSection = document.getElementById('loader');
   if(isLoading){
       loaderSection.classList.remove('d-none')
@@ -67,7 +72,7 @@ const displayTools = (tools) =>{
 }
  const seeMore = document.getElementById('moreToolsBtn').addEventListener('click', function(){
   toggleSpinner(true);
- }) */
+ })
 const loadToolsDetails =  id =>{
     const url =`https://openapi.programming-hero.com/api/ai/tool/${id}`;
     fetch(url)
