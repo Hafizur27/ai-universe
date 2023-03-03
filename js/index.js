@@ -33,7 +33,7 @@ const displayTools = (tools) =>{
         <div class="card h-100">
         <img src="${image}" class="card-img-top" alt="">
         <div class="card-body">
-          <h4 class="card-title">features</h4>
+          <h4 class="card-title">Features :-</h4>
           <h6 class="card-text text-muted">1. ${features[0] ? features[0] : 'No Features'}</h6>
           <h6 class="card-text text-muted">2. ${features[1] ? features[1] : 'No Features'}</h6>
           <h6 class="card-text text-muted">3. ${features[2] ? features[2] : 'No Features'}</h6>
@@ -65,24 +65,38 @@ const loadToolsDetails =  id =>{
 
 const displayToolsDetails = item =>{
   const { image_link ,description, features, integrations, pricing, accuracy, input_output_examples} = item;
-  console.log(input_output_examples)
+  console.log(accuracy)
+
+  const accuracyScore = (accuracy.score)*100;
+
   const modalDetailsLeft = document.getElementById('modalBodyLeft');
   const modalDetailsRight = document.getElementById('modalBodyRight')
   modalDetailsLeft.innerHTML = `
-  <div class="card bg-danger-subtle p-2">
-    <p class="fw-bold"> ${description}</p>
+  <div class="card bg-warning-subtle p-3 border border-2 border-danger">
+      <p class="fw-bold"> ${description}</p>
+  <div class="d-flex justify-content-around gap-4 mt-3">
+      <h6 class="fs-6 fw-semibold p-2 shadow rounded text-success-emphasis"> ${pricing[0].price ? pricing[0].price : 'Free of Cost' } <span>${pricing[0].plan ? pricing[0].plan : 'Basic'}</span></h6>
+      <h6 class="fs-6 fw-semibold p-2 shadow rounded text-warning-emphasis"> ${pricing[1].price ? pricing[1].price : 'Free of Cost' } <span>${pricing[1].plan ? pricing[1].plan : 'Pro'}</span></h6>
+      <h6 class="fs-6 fw-semibold p-2 shadow rounded text-danger-emphasis"> ${pricing[2].price ? pricing[2].price : 'Free of Cost'} <span>${pricing[2].plan ? pricing[0].plan : 'Enterprise' }</span></h6> 
+  </div>
 
-    <p class="fw-bold"> ${pricing[0].price} <span>${pricing[0].plan}</span></p>
-    <p class="fw-bold"> ${pricing[1].price} <span>${pricing[1].plan}</span></p>
-    <p class="fw-bold"> ${pricing[2].price} <span>${pricing[2].plan}</span></p>
-
-    <p>${features['1'].feature_name}</p>
-    <p>${features['2'].feature_name}</p>
-    <p>${features['3'].feature_name}</p>
-
-    <p>${integrations[0]}</p>
-    <p>${integrations[1]}</p>
-    <p>${integrations[2]}</p>
+  <div class="d-flex justify-content-around gap-4 mt-3">
+      <div>
+          <p class="fw-bold"> Features :- </p>
+          <li>${features['1'].feature_name ? features['1'].feature_name : 'Feature Unavailable'}</li>
+          <li>${features['2'].feature_name ? features['2'].feature_name : 'Feature Unavailable'}</li>
+          <li>${features['3'].feature_name ? features['3'].feature_name : 'Feature Unavailable'}</li>    
+    </div> 
+    <div>
+        <p class="fw-bold"> Integrations :- </p>
+        <li>${integrations[0] ? integrations[0] : 'No data Found' }</li>
+        <li>${integrations[1] ? integrations[1] : 'No data Found'}</li>
+        <li>${integrations[2] ? integrations[0] : 'No data Found'}</li>
+    </div>
+  </div>
+  
+   
+   
 </div>
   
   `;
@@ -90,8 +104,9 @@ const displayToolsDetails = item =>{
   <div class="card">
     <img src="${image_link[0]}" class="card-img-top" alt="">
     <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      <h5 class="card-title">${input_output_examples[0].input}</h5>
+      <p class="card-text">${input_output_examples[0].output ? input_output_examples[0].output : 'No! Not Yet! Take a break!!!' }</p>
+      <button class="py-1 px-3 btn btn-danger position-absolute top-0 end-0">${accuracyScore} <span>accuracy</span></button>
     </div>
   </div>
   `;
