@@ -61,6 +61,8 @@ const displayTools = (tools) =>{
     toggleSpinner(false);
   
  }
+
+//  loader function 
  const toggleSpinner = isLoading => {
   const loaderSection = document.getElementById('loader');
   if(isLoading){
@@ -73,6 +75,8 @@ const displayTools = (tools) =>{
  const seeMore = document.getElementById('moreToolsBtn').addEventListener('click', function(){
   toggleSpinner(true);
  })
+
+//  here we fetch specific tool using there id
 const loadToolsDetails =  id =>{
     const url =`https://openapi.programming-hero.com/api/ai/tool/${id}`;
     fetch(url)
@@ -80,6 +84,8 @@ const loadToolsDetails =  id =>{
     .then(data =>displayToolsDetails(data.data))
   }
 
+
+// display modal details
 const displayToolsDetails = item =>{
   const { image_link ,description, features, integrations, pricing, accuracy, input_output_examples} = item;
   console.log(accuracy)
@@ -88,6 +94,7 @@ const displayToolsDetails = item =>{
 
   const modalDetailsLeft = document.getElementById('modalBodyLeft');
   const modalDetailsRight = document.getElementById('modalBodyRight')
+  // left side of modal
   modalDetailsLeft.innerHTML = `
   <div class="card bg-warning-subtle p-3 border border-2 border-danger">
       <p class="fw-bold"> ${description}</p>
@@ -117,6 +124,8 @@ const displayToolsDetails = item =>{
 </div>
   
   `;
+
+  // right side of modal
   modalDetailsRight.innerHTML = `
   <div class="card">
     <img src="${image_link[0]}" class="card-img-top" alt="">
